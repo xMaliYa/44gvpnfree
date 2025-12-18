@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>44G VPN Free Servers</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Animation for Gradient Background */
+        @keyframes gradient-xy {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient-xy 15s ease infinite;
+        }
+
+        /* Blinking Dot Animation */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+        .animate-blink {
+            animation: blink 2s infinite;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Scrollbar hiding for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Side Panel Transition */
+        .side-panel {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans text-white h-screen overflow-hidden flex flex-col">
+
+    <!-- Background Layer -->
+    <div class="fixed inset-0 bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900 animate-gradient -z-10"></div>
+
+    <!-- Header -->
+    <header class="w-full p-4 md:p-6 flex items-center justify-between glass-card shadow-lg z-20">
+        <div class="flex items-center gap-2">
+            <img src="logo.jpg" alt="44G VPN Logo" class="w-12 h-12 rounded-full">
+            <h1 class="text-xl md:text-2xl font-bold tracking-wider">44G VPN</h1>
+        </div>
+        <!-- Menu Button -->
+        <button onclick="toggleSidePanel()" class="text-white hover:text-blue-300 transition focus:outline-none p-2">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+    </header>
+
+    <!-- Side Panel (Drawer) -->
+    <div id="sidePanelOverlay" onclick="toggleSidePanel()" class="fixed inset-0 bg-black/50 z-40 hidden backdrop-blur-sm transition-opacity"></div>
+    <div id="sidePanel" class="fixed top-0 right-0 h-full w-72 bg-gray-900/95 backdrop-blur-xl border-l border-gray-700 z-50 side-panel transform translate-x-full shadow-2xl flex flex-col">
+        <div class="p-5 flex justify-between items-center border-b border-gray-700">
+            <h2 class="text-xl font-bold text-blue-400">Menu</h2>
+            <button onclick="toggleSidePanel()" class="text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-4 flex flex-col gap-4 overflow-y-auto">
+            <!-- Mobile Clients Section -->
+            <div class="flex flex-col">
+                <button onclick="toggleDropdown('mobileList')" class="flex items-center justify-between w-full bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition font-semibold">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-mobile-screen"></i> Mobile Clients</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="mobileArrow"></i>
+                </button>
+                <div id="mobileList" class="hidden flex-col gap-2 mt-2 pl-4 border-l-2 border-gray-700 ml-2">
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">Netmod (Android)</div>
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">Npv Tunnel (Android/iOS)</div>
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">V2rayTun (Android/iOS)</div>
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">V2box (Android/iOS)</div>
+                </div>
+            </div>
+
+            <!-- PC Clients Section -->
+            <div class="flex flex-col">
+                <button onclick="toggleDropdown('pcList')" class="flex items-center justify-between w-full bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition font-semibold">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-desktop"></i> PC Clients</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="pcArrow"></i>
+                </button>
+                <div id="pcList" class="hidden flex-col gap-2 mt-2 pl-4 border-l-2 border-gray-700 ml-2">
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">Netch (Windows)</div>
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">Netmod (Windows)</div>
+                    <div class="bg-gray-800/50 p-2 rounded text-sm text-gray-300">Qv2ray (Mac/Linux)</div>
+                </div>
+            </div>
+
+            <!-- How to Run Button -->
+            <button onclick="openHowToRun()" class="w-full bg-blue-600 hover:bg-blue-500 text-white p-3 rounded-lg font-bold shadow-lg transition flex items-center justify-center gap-2 mt-2">
+                <i class="fa-solid fa-circle-question"></i>
+                How to Run
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content (Scrollable) -->
+    <main class="flex-grow overflow-y-auto p-4 md:p-8 no-scrollbar">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-center text-2xl font-semibold mb-8 text-blue-100">Free Servers</h2>
+            
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="dialog.jpg" alt="Server 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">Dialog Zoom</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('Dialog Zoom', 'vless://e8d9ec32-3768-4a43-baec-bda9733284a6@newtst.fortfourgang.shop:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=aka.ms#44G%20VPN-Dialog%20Zoom%20FREE')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('Dialog Zoom')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="slt.jpg" alt="Server 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">SLT4G/Fiber Zoom</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('SLT4G/Fiber Zoom', 'vless://e55b16da-2309-4707-838c-ca1e574bf67a@newtst.fortfourgang.shop:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=m.zoom.us#44G%20VPN-SLT4G%2FFiber%20Zoom%20FREE')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('SLT4G/Fiber Zoom')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="slt.jpg" alt="Server 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">SLT4G/Fiber Netflix</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('SLT4G/Fiber Netflix', 'vless://0d3a189b-c089-4ef6-9dab-e72d1b1ffb61@newtst.fortfourgang.shop:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=netflix.com#44G%20VPN-SLT4G%2FFiber%20Netflix%20FREE')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('SLT4G/Fiber Netflix')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="Mobitel.jpg" alt="Server 4" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">Mobitel Zoom</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('Mobitel Zoom', 'nm-vless:///GZHw3MSIrFzv39oL2dsi4f6V4kPig8MtJlIQAyozXhr3NOaU9FsEQJg4UtrSlHxBWLMuMwX8m8/KoQNYW+PPq21E1/yfab2CxB4nhXWrUemNG9/fHp4HrQVTsy+QnsWRDUqD3IXgGI6qCYtQJ+nXwjqvInlKrMAIZP1WZa+3wU4CwcGgaQeIXq8GVRgHVYrm/TXYAe/klB2n3/PuMBlOh960pHuSjIwwB6WjQ5yoW13s3nWGrQu83pOWcb55agJ3O8W1lsEqWCtSM9YYn1hvP6FISoUhHsTM1uBcur4n/Ih3DuvJ8yu8HYtJJTlvCWu')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('Mobitel Zoom')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="airtel.jpg" alt="Server 5" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">Airtel Zoom</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('Airtel Zoom', 'vless://172deeb8-c006-4d0c-ab81-64cee2c5c150@support.zoom.us:80?type=ws&encryption=none&path=%2Fnewtst.fortfourgang.shop&host=newtst.fortfourgang.shop&security=none#A%20ZOOM-AIRTEL%20ZOOM%20FREE')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('Airtel Zoom')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-40 bg-gray-900 rounded-xl mb-3 overflow-hidden relative">
+                        <img src="hutch.png" alt="Server 6" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex items-center gap-2 mb-4 bg-black/30 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-blink shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div>
+                        <span class="text-xs font-bold text-green-400 uppercase tracking-wide">Online</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4">Hutch Social</h3>
+                    <div class="flex gap-3 w-full mt-auto">
+                        <button onclick="openModal('Hutch Social', 'vless://d73b1c64-5835-4841-8697-ea353494bec0@newtst.fortfourgang.shop:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=t.me#44G%20VPN-Hutch%20Social%20FREE')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg font-semibold transition shadow-lg hover:shadow-blue-500/50">
+                            Get
+                        </button>
+                        <button onclick="openRatingModal('Hutch Social')" class="w-12 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-yellow-500/50 rounded-lg transition shadow-lg group">
+                            <i class="fa-solid fa-star text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="h-16 md:h-20"></div> <!-- Spacer for fixed footer -->
+        </div>
+    </main>
+
+    <!-- Footer Buttons -->
+    <footer class="w-full glass-card p-4 z-20 flex flex-col sm:flex-row gap-3 justify-center items-center shrink-0">
+        <!-- New 44G VPN Website Button -->
+        <a href="https://xmaliya.github.io/44gvpnstore/" target="_blank" class="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-purple-500/50 w-full sm:w-auto justify-center">
+            <i class="fa-solid fa-globe text-xl"></i>
+            44G VPN Website
+        </a>
+        <a href="https://chat.whatsapp.com/GqSN8aHQxyC6JbWLVOuFoT?mode=hqrt3" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-green-500/50 w-full sm:w-auto justify-center">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            Whatsapp Group
+        </a>
+        <a href="https://t.me/fortyfourgangvpn" target="_blank" class="flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-blue-400/50 w-full sm:w-auto justify-center">
+            <i class="fa-brands fa-telegram text-xl"></i>
+            Telegram Channel
+        </a>
+    </footer>
+
+    <!-- Powered by Text -->
+    <div class="w-full bg-gray-900/50 text-center text-xs py-1 text-gray-400 flex justify-center items-center gap-1 z-10">
+        Powered by <span class="font-bold text-blue-400">44 GANG</span>
+    </div>
+
+    <!-- VLESS Code Popup Modal -->
+    <div id="vlessModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-lg shadow-2xl transform transition-all scale-100 relative">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <!-- Dynamic Modal Title with ID -->
+            <h3 id="modalTitle" class="text-xl font-bold text-white mb-4 text-center">Config Code</h3>
+
+            <!-- Code Display Area -->
+            <div class="bg-gray-800 rounded-lg p-4 mb-4 border border-gray-600">
+                <p id="vlessCode" class="text-green-400 font-mono text-xs sm:text-sm break-all leading-relaxed">
+                    <!-- Code will be inserted here via JS -->
+                </p>
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="copyCode()" id="copyBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-lg hover:shadow-blue-500/30">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copy Code</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-md shadow-2xl transform transition-all scale-100 relative">
+            
+            <!-- Close Button -->
+            <button onclick="closeRatingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <h3 class="text-xl font-bold text-white mb-2 text-center">Rate Us</h3>
+            <p id="ratingProductName" class="text-blue-400 text-center mb-6 font-semibold text-sm uppercase tracking-wider"></p>
+
+            <!-- Star Rating -->
+            <div class="flex justify-center gap-2 mb-6" id="starContainer">
+                <button onclick="setRating(1)" class="rating-star text-3xl text-yellow-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                <button onclick="setRating(2)" class="rating-star text-3xl text-yellow-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                <button onclick="setRating(3)" class="rating-star text-3xl text-yellow-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                <button onclick="setRating(4)" class="rating-star text-3xl text-yellow-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                <button onclick="setRating(5)" class="rating-star text-3xl text-yellow-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+            </div>
+
+            <!-- Inputs -->
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-gray-400 text-sm mb-1 ml-1">Your Name</label>
+                    <input type="text" id="ratingName" placeholder="John Doe" class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-gray-400 text-sm mb-1 ml-1">Comment</label>
+                    <textarea id="ratingComment" rows="3" placeholder="Great service!..." class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:outline-none transition"></textarea>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="sendReview()" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-lg hover:shadow-green-500/30">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Submit Rating</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- How To Run Modal -->
+    <div id="howToRunModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-md shadow-2xl transform transition-all scale-100 relative text-center">
+            
+            <!-- Close Button -->
+            <button onclick="closeHowToRun()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <div class="mb-4 text-blue-400">
+                <i class="fa-solid fa-circle-question text-4xl"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-6">How to run v2ray config</h3>
+
+            <div class="flex flex-col gap-3">
+                <a href="https://youtube.com/shorts/xAwLkm8hTNM?si=AjOyw0T7Ln0w4HoZ" target="_blank" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-3 transition shadow-lg group">
+                    <i class="fa-solid fa-mobile-screen text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    How to run on Mobile
+                </a>
+                
+                <a href="https://youtu.be/SfmbcI8U_kk?si=FgsCQYqpfBjaaT66" target="_blank" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-3 transition shadow-lg group">
+                    <i class="fa-solid fa-laptop text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    How to run on PC
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification (Hidden by default) -->
+    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-[70] flex items-center gap-2">
+        <i class="fa-solid fa-check-circle"></i>
+        <span>Copied to clipboard!</span>
+    </div>
+
+    <script>
+        // --- Side Panel Logic ---
+        const sidePanel = document.getElementById('sidePanel');
+        const sidePanelOverlay = document.getElementById('sidePanelOverlay');
+
+        function toggleSidePanel() {
+            if (sidePanel.classList.contains('translate-x-full')) {
+                // Open
+                sidePanel.classList.remove('translate-x-full');
+                sidePanelOverlay.classList.remove('hidden');
+            } else {
+                // Close
+                sidePanel.classList.add('translate-x-full');
+                sidePanelOverlay.classList.add('hidden');
+            }
+        }
+
+        // --- Dropdown/Accordion Logic for Side Panel ---
+        function toggleDropdown(listId) {
+            const list = document.getElementById(listId);
+            const arrowId = listId === 'mobileList' ? 'mobileArrow' : 'pcArrow';
+            const arrow = document.getElementById(arrowId);
+            
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                list.classList.add('flex');
+                arrow.classList.add('rotate-180');
+            } else {
+                list.classList.add('hidden');
+                list.classList.remove('flex');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        // --- VLESS Modal Logic ---
+        const modal = document.getElementById('vlessModal');
+
+        // Updated openModal function to accept title and code
+        function openModal(title, code) {
+            // Update the modal content if arguments are provided
+            if (title) {
+                document.getElementById('modalTitle').innerText = title;
+            }
+            if (code) {
+                document.getElementById('vlessCode').innerText = code;
+            }
+
+            modal.classList.remove('hidden');
+            // Small animation for entry
+            const content = modal.querySelector('div');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- Rating Modal Logic ---
+        let currentRating = 5;
+        let currentProduct = '';
+        const ratingModal = document.getElementById('ratingModal');
+
+        function openRatingModal(productName) {
+            currentProduct = productName;
+            document.getElementById('ratingProductName').innerText = productName; // Display product name
+
+            ratingModal.classList.remove('hidden');
+            
+            // Reset fields
+            document.getElementById('ratingName').value = '';
+            document.getElementById('ratingComment').value = '';
+            setRating(5);
+
+            // Animation
+            const content = ratingModal.querySelector('div');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeRatingModal() {
+            ratingModal.classList.add('hidden');
+        }
+
+        ratingModal.addEventListener('click', (e) => {
+            if (e.target === ratingModal) {
+                closeRatingModal();
+            }
+        });
+
+        function setRating(n) {
+            currentRating = n;
+            const stars = document.querySelectorAll('.rating-star');
+            stars.forEach((star, index) => {
+                if (index < n) {
+                    star.classList.remove('text-gray-600');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.add('text-gray-600');
+                    star.classList.remove('text-yellow-400');
+                }
+            });
+        }
+
+        function sendReview() {
+            const name = document.getElementById('ratingName').value.trim();
+            const comment = document.getElementById('ratingComment').value.trim();
+            
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            // Updated message format: Rating number as text, then product name
+            const message = `${currentRating} Star Rating - ${currentProduct}\n\nName: ${name}\nComment: ${comment}`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            window.open(`https://wa.me/94771273983?text=${encodedMessage}`, '_blank');
+            closeRatingModal();
+        }
+
+
+        // --- How To Run Modal Logic ---
+        const howToRunModal = document.getElementById('howToRunModal');
+
+        function openHowToRun() {
+            // Close side panel first for better UX
+            toggleSidePanel();
+            
+            howToRunModal.classList.remove('hidden');
+            const content = howToRunModal.querySelector('div');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeHowToRun() {
+            howToRunModal.classList.add('hidden');
+        }
+
+        howToRunModal.addEventListener('click', (e) => {
+            if (e.target === howToRunModal) {
+                closeHowToRun();
+            }
+        });
+
+
+        // --- Copy Logic ---
+        function copyCode() {
+            const codeText = document.getElementById('vlessCode').innerText.trim();
+            const copyBtn = document.getElementById('copyBtn');
+            const originalBtnContent = copyBtn.innerHTML;
+
+            // Use the clipboard API
+            navigator.clipboard.writeText(codeText).then(() => {
+                showToast();
+                
+                // Visual feedback on button
+                copyBtn.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+                copyBtn.classList.add('bg-green-600', 'hover:bg-green-500');
+                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied!</span>';
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyBtn.classList.add('bg-blue-600', 'hover:bg-blue-500');
+                    copyBtn.classList.remove('bg-green-600', 'hover:bg-green-500');
+                    copyBtn.innerHTML = originalBtnContent;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for some older browsers/iframes
+                const textArea = document.createElement("textarea");
+                textArea.value = codeText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast();
+                } catch (err) {
+                    // Using console.error instead of alert as per instructions
+                    console.error('Unable to copy automatically. Please select text and copy manually.');
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // --- Toast Notification Logic ---
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
